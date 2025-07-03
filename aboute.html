@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Designe District - About</title>
+  <style>
+    :root {
+      --primary: #0099ff;
+      --primary-light: #33adff;
+      --dark-bg: #0f0f0f;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --text-light: #eee;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0400ff, #000147);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 200px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      border-left: 1px solid var(--glass-border);
+      box-shadow: -3px 0 20px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      user-select: none;
+    }
+
+    .logo img {
+      height: 32px;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 4px var(--primary));
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    nav a {
+      color: #bbb;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: white;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    nav a.active::before,
+    nav a:hover::before {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 100%;
+      background: var(--primary-light);
+      border-radius: 5px;
+    }
+
+    main {
+      flex: 1;
+      margin-right: 200px;
+      padding: 4rem 3rem 6rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      user-select: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #ffffff, #001aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(0, 38, 255, 0.8);
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #33adff; }
+      to { text-shadow: 0 0 40px #007acc; }
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 2.5rem 3rem;
+      color: #ddd;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      box-shadow: 0 0 30px rgba(0, 153, 255, 0.3);
+    }
+
+    .my-designs {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 25px rgba(0, 153, 255, 0.2);
+    }
+
+    .my-designs h3 {
+      color: var(--primary-light);
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 8px var(--primary-light);
+    }
+
+    .design-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .design-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 0.8rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 350px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 153, 255, 0.15);
+    }
+
+    .design-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 35px rgba(0, 153, 255, 0.3);
+    }
+
+    .design-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.2);
+      user-select: none;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.7);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        position: relative;
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border-left: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        box-shadow: none;
+      }
+
+      main {
+        margin: 0;
+        padding: 2.5rem 1rem 6rem;
+        width: 100%;
+      }
+
+      footer {
+        width: 100%;
+        margin: 0;
+        position: relative;
+        box-shadow: none;
+      }
+
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a::before {
+        display: none;
+      }
+
+      nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .content {
+        padding: 1.5rem 1rem;
+      }
+
+      .design-gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" aria-label="Vertox Photoshop Logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/120px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Logo" />
+      Vertox
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="aboute.html" class="active">About</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+      <a href="cont.html">Videos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>About Designe District</h1>
+    </div>
+
+    <div class="content">
+      <p>Designe District is a creative community focused on bringing together talented designers, developers, and artists from around the world. Our mission is to foster collaboration and innovation by providing high-quality resources and support to all members.</p>
+      <p>Founded in 2020, Designe District has grown into a vibrant hub where professionals can network, learn new skills, and showcase their work. We organize regular events, workshops, and community challenges to keep our members engaged and inspired.</p>
+      <p>Whether you’re a beginner or an experienced professional, you’ll find a welcoming environment and plenty of opportunities to grow with us. Join our Discord server and become part of the Designe District family!</p>
+    </div>
+
+    <!-- My Designs Section -->
+    <section class="my-designs">
+      <h3>My Designs</h3>
+      <div class="design-gallery">
+        <div class="design-card">
+          <img src="https://i.pinimg.com/736x/18/6d/f2/186df2d03caa2a22603256cabd7ad916.jpg" alt="Design 1" />
+        </div>
+        <div class="design-card">
+          <img src="https://i.pinimg.com/736x/b4/11/61/b41161b48eb6ca30ec7514c18b57bc4c.jpg" alt="Design 2" />
+        </div>
+        <div class="design-card">
+          <img src="https://i.pinimg.com/736x/ac/ee/a9/aceea97935b99ce2facf4129288da223.jpg" alt="Design 3" />
+        </div>
+      
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Designe District — Made by Vertox
+  </footer>
+
+</body>
+</html>

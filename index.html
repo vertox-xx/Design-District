@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Designe District</title>
+  <style>
+    :root {
+      --primary: #0099ff;
+      --primary-light: #33adff;
+      --dark-bg: #0f0f0f;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --text-light: #eee;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0400ff, #000147);
+      color: var(--text-light);
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 200px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      border-left: 1px solid var(--glass-border);
+      box-shadow: -3px 0 20px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      user-select: none;
+    }
+
+    .logo img {
+      height: 32px;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 4px var(--primary));
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    nav a {
+      color: #bbb;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: white;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    nav a.active::before,
+    nav a:hover::before {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 100%;
+      background: var(--primary-light);
+      border-radius: 5px;
+    }
+
+    main {
+      flex: 1;
+      margin-right: 200px;
+      padding: 4rem 3rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      user-select: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #ffffff, #001aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(0, 38, 255, 0.8);
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #33adff; }
+      to { text-shadow: 0 0 40px #007acc; }
+    }
+
+    .section-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    .section {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 22px;
+      padding: 2.8rem 2.5rem;
+      width: 320px;
+      box-shadow: 0 0 25px rgba(51, 173, 255, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 35px rgba(51, 173, 255, 0.35);
+    }
+
+    .section h3 {
+      margin-bottom: 1.3rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      user-select: text;
+    }
+
+    .section p {
+      color: #ddd;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      user-select: text;
+    }
+
+    .buttons-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons-bar a {
+      background: var(--primary);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px var(--primary-light);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .buttons-bar a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--primary-light);
+    }
+
+    .buttons-bar a::after {
+      content: "";
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 150px;
+      height: 150px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+
+    .buttons-bar a[href*="discord"]::after {
+      background-image: url('https://cdn.discordapp.com/attachments/1387949495970697319/1390168347626442803/ds.png?ex=686746aa&is=6865f52a&hm=533219f16ee10dc1ab2ceb22922887f64e7975368512c97e73b1a24c7b32248c&');
+    }
+
+    .buttons-bar a[href*="youtube"]::after {
+      background-image: url('https://cdn.discordapp.com/attachments/1387949495970697319/1390168347219333120/yt.png?ex=686746aa&is=6865f52a&hm=d40143dd7b30d154772d527d3b5b04b5d23481d5e904c3b8a365d9311679b356&');
+    }
+
+    .buttons-bar a:hover::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+    
+    /* Discord widget container */
+    .discord-widget-container {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      width: 360px;
+      padding: 1.4rem 1.2rem 1.6rem;
+      box-shadow: 0 0 30px rgba(0, 153, 255, 0.4);
+      text-align: center;
+      color: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+      margin-bottom: 2rem;
+    }
+
+    .discord-widget-container:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 50px rgba(0, 153, 255, 0.6);
+    }
+
+    .discord-widget-container h4 {
+      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      color: var(--primary-light);
+      font-weight: 700;
+      text-shadow: 0 0 10px var(--primary-light);
+      user-select: text;
+    }
+
+    iframe {
+      border-radius: 20px;
+      border: none;
+      width: 100%;
+      height: 500px;
+      user-select: none;
+    }
+
+    /* Ads/Partners container with clickable images */
+    .ads-partners {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 22px;
+      padding: 1.5rem 2rem;
+      width: 100%;
+      max-width: 1080px;
+      color: #ddd;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 153, 255, 0.25);
+      user-select: none;
+      margin-bottom: 3rem;
+    }
+
+    .ads-partners h4 {
+      margin-bottom: 1rem;
+      color: var(--primary-light);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--primary-light);
+    }
+
+    .ads-logos {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .ads-logos a {
+      display: inline-block;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(51, 173, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      max-width: 140px;
+      user-select: none;
+    }
+
+    .ads-logos a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(51, 173, 255, 0.6);
+    }
+
+    .ads-logos img {
+      width: 140px;
+      height: auto;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.2);
+      user-select: none;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.7);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        position: relative;
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border-left: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        box-shadow: none;
+      }
+
+      main {
+        margin: 0;
+        padding: 2.5rem 1rem 6rem;
+        width: 100%;
+      }
+
+      footer {
+        width: 100%;
+        margin: 0;
+        position: relative;
+        box-shadow: none;
+      }
+
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a::before {
+        display: none;
+      }
+
+      nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.8rem;
+        padding: 0;
+      }
+
+      .discord-widget-container {
+        width: 90%;
+        max-width: 420px;
+        margin: 0 auto 2rem;
+      }
+
+      .ads-partners {
+        max-width: 90%;
+        margin: 0 auto 3rem;
+      }
+
+      .ads-logos {
+        gap: 1rem;
+      }
+
+      .ads-logos a {
+        max-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" aria-label="Vertox Photoshop Logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/120px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Logo" />
+      Vertox
+    </div>
+
+    <nav>
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="aboute.html" tabindex="0">About</a>
+      <a href="team.html" tabindex="0">Team</a>
+      <a href="contact.html" tabindex="0">Contact</a>
+      <a href="cont.html" tabindex="0">Videos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Designe District</h1>
+    </div>
+
+    <div class="section-container" role="region" aria-label="Site Features">
+      <div class="section">
+        <h3>Community</h3>
+        <p>Join a group of professionals and apply.</p>
+      </div>
+      <div class="section">
+        <h3>Working</h3>
+        <p>Our team is working 24/7, just submit your order.</p>
+      </div>
+      <div class="section">
+        <h3>Tools</h3>
+        <p>If you want to know our tools, we work with the best tools.</p>
+      </div>
+    </div>
+
+    <div class="buttons-bar">
+      <a href="https://discord.gg/DmC3jM8yTf" target="_blank">Discord</a>
+      <a href="https://www.youtube.com/@Ver_toxxx" target="_blank">YouTube</a>
+    </div>
+
+    <section class="discord-widget-container" aria-label="Discord Members Only Widget">
+      <h4>Members Only</h4>
+      <iframe
+        src="https://discord.com/widget?id=1386703220226920490&theme=dark"
+        allowtransparency="true"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        title="Discord Server Widget"
+      ></iframe>
+    </section>
+
+    <!-- Ads / Partners Section with clickable images -->
+    <section class="ads-partners" aria-label="Ads and Partners Section">
+      <h4>Our Partners & Sponsors</h4>
+      <div class="ads-logos">
+        <a href="https://partner1.example.com" target="_blank" rel="noopener noreferrer" aria-label="Partner 1">
+          <img src="https://i.pinimg.com/736x/8e/90/1f/8e901f7e4827cac9073ae2c3131d90fa.jpg" alt="Partner 1 Logo" />
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Designe District — Made by Vertox
+  </footer>
+
+</body>
+</html>

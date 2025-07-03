@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Designe District</title>
+  <style>
+    /* هنا نفس الستايل لي عطيتيني */
+    :root {
+      --primary: #0099ff;
+      --primary-light: #33adff;
+      --dark-bg: #0f0f0f;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --text-light: #eee;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0400ff, #000147);
+      color: var(--text-light);
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 200px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      border-left: 1px solid var(--glass-border);
+      box-shadow: -3px 0 20px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      user-select: none;
+    }
+
+    .logo img {
+      height: 32px;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 4px var(--primary));
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    nav a {
+      color: #bbb;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: white;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    nav a.active::before,
+    nav a:hover::before {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 100%;
+      background: var(--primary-light);
+      border-radius: 5px;
+    }
+
+    main {
+      flex: 1;
+      margin-right: 200px;
+      padding: 4rem 3rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #ffffff, #001aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(0, 38, 255, 0.8);
+      animation: glow 2.5s ease-in-out infinite alternate;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #33adff; }
+      to { text-shadow: 0 0 40px #007acc; }
+    }
+
+    .section-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    .section {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 22px;
+      padding: 2.8rem 2.5rem;
+      width: 320px;
+      box-shadow: 0 0 25px rgba(51, 173, 255, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 35px rgba(51, 173, 255, 0.35);
+    }
+
+    .section h3 {
+      margin-bottom: 1.3rem;
+      font-size: 1.75rem;
+      color: var(--primary);
+    }
+
+    .section p {
+      color: #ddd;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons-bar a {
+      background: var(--primary);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px var(--primary-light);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .buttons-bar a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--primary-light);
+    }
+
+    .discord-widget-container {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      width: 360px;
+      padding: 1.4rem 1.2rem 1.6rem;
+      box-shadow: 0 0 30px rgba(0, 153, 255, 0.4);
+      text-align: center;
+      color: white;
+      margin-top: 3rem;
+    }
+
+    .discord-widget-container h4 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      color: var(--primary-light);
+      text-shadow: 0 0 10px var(--primary-light);
+    }
+
+    iframe {
+      border-radius: 20px;
+      border: none;
+      width: 100%;
+      height: 500px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: 4rem;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/120px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Logo" />
+      Vertox
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="aboute.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="cont.html">Videos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Contact Me</h1>
+    </div>
+
+    <div class="section-container">
+      <div class="section">
+        <h3>Discord</h3>
+        <p>Join the server or send a DM to <strong>Design District</strong></p>
+        <div class="buttons-bar">
+          <a href="https://discord.gg/DmC3jM8yTf" target="_blank">Join Discord</a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Email</h3>
+        <p>Send me an email and I’ll reply quickly.</p>
+        <div class="buttons-bar">
+          <a href="mailto:iphonehhhh00@gmail.com">Send Email</a>
+        </div>
+      </div>
+
+            <div class="section">
+        <h3>Instagram</h3>
+        <p>Follow me or send a message on Instagram.</p>
+        <div class="buttons-bar">
+          <a href="https://instagram.com/v2rt_ox" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Designe District — Made by Vertox
+  </footer>
+
+</body>
+</html>
